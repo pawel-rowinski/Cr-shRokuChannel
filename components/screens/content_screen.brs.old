@@ -1,0 +1,24 @@
+sub init()
+    m.content_grid = m.top.FindNode("content_grid")
+    m.header = m.top.FindNode("header")
+end sub  
+
+sub onFeedChanged(obj)
+    feed = obj.getData()
+    m.header.text = feed.title
+    postercontent = createObject("roSGNode","ContentNode")
+    for  i=0 to 5 step 1
+        node = createObject("roSGNode","ContentNode")
+        node.HDGRIDPOSTERURL = "http://192.168.66.31:80/roku/images/thumbnail-comedy1.jpg"
+        node.SHORTDESCRIPTIONLINE1 = "ITEM No. "+ i.toStr()
+        node.SHORTDESCRIPTIONLINE2 = "This is a description."
+        postercontent.appendChild(node)
+    end for
+    showpostergrid(postercontent)
+end sub  
+
+sub showpostergrid(content)
+  m.content_grid.content=content
+  m.content_grid.visible=true
+  m.content_grid.setFocus(true)
+end sub
